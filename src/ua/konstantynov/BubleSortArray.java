@@ -5,11 +5,11 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class BubleSortArray {
     public static void main(String[] args) {
-        int[] array = new int[ThreadLocalRandom.current().nextInt(5,20)];
+        int[] array = new int[ThreadLocalRandom.current().nextInt(5, 20)];
         fillArray(array, -100, 100);
-        System.out.println("Массив:                    "+Arrays.toString(array));
-        System.out.println("Сортировка по возрастанию: "+Arrays.toString(sortArray(array,true)));
-        System.out.println("Сортировка по убыванию:    "+Arrays.toString(sortArray(array,false)));
+        System.out.println("Массив:                    " + Arrays.toString(array));
+        System.out.println("Сортировка по возрастанию: " + Arrays.toString(sortArray(array, true)));
+        System.out.println("Сортировка по убыванию:    " + Arrays.toString(sortArray(array, false)));
     }
 
     public static void fillArray(int[] array, int least, int bound) {
