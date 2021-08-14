@@ -9,7 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Task1 {
     public static void main(String[] args) {
         int[] array = new int[400];
-        fillArray(array, 1, 10);
+        fillArray(array, 1, 11);
         System.out.println("Среднее арифметическое массива = " + arithmeticMean(array));
         System.out.println("Среднее геометрическое массива = " + geometricMean(array));
     }
