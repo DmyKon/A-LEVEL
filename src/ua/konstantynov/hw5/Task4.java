@@ -12,8 +12,7 @@ public class Task4 {
         Arrays.setAll(array, i -> array[i] + ThreadLocalRandom.current().nextInt(0, 100));
         System.out.println(Arrays.toString(array));
         System.out.println("Удалить из массива элемент с индексом ...");
-        int index = new Scanner(System.in).nextInt();
-        System.out.println(Arrays.toString(deleteAtIndex(array, index)));
+        System.out.println(Arrays.toString(deleteAtIndex(array, new Scanner(System.in).nextInt())));
     }
 
     public static int[] deleteAtIndex(int[] array, int index) {
