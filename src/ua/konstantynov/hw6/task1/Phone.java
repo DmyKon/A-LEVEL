@@ -1,4 +1,4 @@
-package ua.konstantynov.hw6;
+package ua.konstantynov.hw6.task1;
 
 class Phone {
     String number;

@@ -1,4 +1,4 @@
-package ua.konstantynov.hw7;
+package ua.konstantynov.hw7.task2;
 
 public class Student {
     String firstName;

@@ -11,7 +11,7 @@
 //ж) Добавить конструктор, который принимает на вход
 // два параметра для инициализации переменных класса - number, model.
 //з) Добавить конструктор без параметров.
-package ua.konstantynov.hw6;
+package ua.konstantynov.hw6.task1;
 
 public class Task1 {
     public static void main(String[] args) {

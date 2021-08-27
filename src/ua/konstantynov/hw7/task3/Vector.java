@@ -1,4 +1,4 @@
-package ua.konstantynov.hw7;
+package ua.konstantynov.hw7.task3;
 
 import java.util.concurrent.ThreadLocalRandom;
 

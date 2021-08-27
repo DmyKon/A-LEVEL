@@ -10,7 +10,7 @@
 // Если средняя оценка аспиранта равна 5, то сумма 200 грн, иначе 180.
 // г) Создать массив типа Student, содержащий объекты класса Student и Aspirant.
 // Вызвать метод getScholarship() для каждого элемента массива.
-package ua.konstantynov.hw7;
+package ua.konstantynov.hw7.task2;
 
 public class Task2 {
     public static void main(String[] args) {
