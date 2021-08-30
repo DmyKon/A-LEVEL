@@ -5,11 +5,11 @@ class Phone {
     String model;
     String weight;
 
-    public String getNubmer() {
+    public String getNumber() {
         return number;
     }
 
-    public static void receiveCall(String name) {
+    public void receiveCall(String name) {
         System.out.println("Звонит {" + name + "}");
     }
 

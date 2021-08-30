@@ -25,9 +25,11 @@ public class Task1 {
         System.out.println(phone1);
         System.out.println(phone2);
         System.out.println(phone3);
-        Phone.receiveCall("телефон");
-        System.out.println(phone1.getNubmer());
-        System.out.println(phone2.getNubmer());
-        System.out.println(phone3.getNubmer());
+        phone1.receiveCall("телефон 1");
+        phone2.receiveCall("телефон 2");
+        phone3.receiveCall("телефон 3");
+        System.out.println(phone1.getNumber());
+        System.out.println(phone2.getNumber());
+        System.out.println(phone3.getNumber());
     }
 }
