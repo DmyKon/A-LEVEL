@@ -16,16 +16,16 @@ public class Task2 {
     public static void main(String[] args) {
         Student student1 = new Student("Иван", "Иванов", "группа А", 5);
         Student student2 = new Student("Олег", "Олегов", "группа Б", 4.5);
-        Aspirant aspirant1 = new Aspirant("Сергей", "Сергеев", "группа В", 4.9);
+        Aspirant aspirant1 = new Aspirant("ООП", "Сергей", "Сергеев", "группа В", 4.9);
         Aspirant aspirant2 = new Aspirant();
+        aspirant2.scienceWork = "Коллекции";
         aspirant2.firstName = "Ян";
         aspirant2.lastName = "Янов";
         aspirant2.group = "группа Г";
         aspirant2.averageMark = 5;
         Student[] students = {student1, student2, aspirant1, aspirant2};
         for (Student student : students) {
-            System.out.println(student.firstName + " " + student.lastName + " " + student.group +
-                    " cтипендия: " + student.getScholarship() + " грн.");
+            System.out.println(student.toString());
         }
     }
 

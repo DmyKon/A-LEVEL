@@ -3,9 +3,9 @@ package ua.konstantynov.hw7.task3;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Vector {
-    double x;
-    double y;
-    double z;
+    private double x;
+    private double y;
+    private double z;
 
     @Override
     public String toString() {

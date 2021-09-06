@@ -32,12 +32,12 @@ public class Test2Test {
 
     @Test
     public void testIncorrectInputKnightsMove() {
-        Assert.assertTrue(knightsMove("A3-B5", "B5-D6"));
+        Assert.assertFalse(knightsMove("A3-B5", "B5-D6"));
         Assert.assertFalse(knightsMove("12345", "abcde"));
         Assert.assertFalse(knightsMove("!!!#%&^*(", "98631143"));
     }
 
-    @Test(expected = StringIndexOutOfBoundsException.class)
+    @Test
     public void testEmptyInputKnightsMove() {
         Assert.assertFalse(knightsMove("", "b5"));
         Assert.assertFalse(knightsMove("a1", ""));
