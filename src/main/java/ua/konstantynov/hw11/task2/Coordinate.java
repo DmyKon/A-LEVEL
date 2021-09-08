@@ -5,10 +5,6 @@ public class Coordinate {
     private String target;
     private int[] coordinate;
 
-    public int[] getCoordinate() {
-        return coordinate;
-    }
-
     public void setCurrent(String current) {
         this.current = current;
     }
@@ -19,6 +15,10 @@ public class Coordinate {
 
     public void setCoordinate(int[] coordinate) {
         this.coordinate = coordinate;
+    }
+
+    public int[] getCoordinate() {
+        return coordinate;
     }
 
     public Coordinate() {
