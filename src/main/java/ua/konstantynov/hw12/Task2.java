@@ -8,22 +8,22 @@ import java.io.IOException;
 
 public class Task2 {
     public static void main(String[] args) {
-        try {
-            f(g());
-        } catch (IOException exception) {
-            try {
-                throw new Exception("2 исключение f()");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        f();
     }
 
     static boolean g() throws IOException {
         throw new IOException("1 исключение g()");
     }
 
-    static void f(boolean value) {
+    static void f() {
+        try {
+            g();
+        } catch (IOException exception) {
+            try {
+                throw new RuntimeException("2 исключение f()");
+            } catch (RuntimeException e) {
+                e.printStackTrace();
+            }
+        }
     }
-
 }
