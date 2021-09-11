@@ -12,6 +12,7 @@ public class PhoneBook {
         PHONE_BOOK[0] = "016/161616";
         PHONE_BOOK[1] = "016/161617";
         PHONE_BOOK[2] = "016/161618";
+        System.out.println("Enter a phone number");
         String phone = new Scanner(System.in).nextLine();
         if (findIndexByPhoneNumber(PHONE_BOOK, phone).isPresent()) {
             System.out.println("Phone index is " + findIndexByPhoneNumber(PHONE_BOOK, phone).get());
@@ -21,6 +22,9 @@ public class PhoneBook {
     }
 
     static Optional<Integer> findIndexByPhoneNumber(String[] PHONE_BOOK, String phoneNumber) {
+        if (PHONE_BOOK == null || phoneNumber == null) {
+            return Optional.empty();
+        }
         for (int i = 0; i < PHONE_BOOK.length; i++) {
             if (phoneNumber.equals(PHONE_BOOK[i])) {
                 return Optional.of(i);

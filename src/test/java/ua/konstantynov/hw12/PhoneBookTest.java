@@ -25,7 +25,8 @@ public class PhoneBookTest {
         Assert.assertEquals(Optional.of(1), findIndexByPhoneNumber(PHONE_BOOK, "016/161617"));
         Assert.assertEquals(Optional.of(2), findIndexByPhoneNumber(PHONE_BOOK, "016/161618"));
     }
-   @Test
+
+    @Test
     public void findIndexByPhoneNumberIncorrectNumberTest() {
         Assert.assertEquals(Optional.empty(), findIndexByPhoneNumber(PHONE_BOOK, "000/000000"));
         Assert.assertEquals(Optional.empty(), findIndexByPhoneNumber(PHONE_BOOK, "qwertyuiop"));
@@ -33,7 +34,16 @@ public class PhoneBookTest {
     }
 
     @Test
-    public void findIndexByPhoneNumberEmptyNumberTest() {
+    public void findIndexByPhoneNumberEmptyTest() {
+        Assert.assertEquals(Optional.empty(), findIndexByPhoneNumber(new String[]{}, "016/161616"));
         Assert.assertEquals(Optional.empty(), findIndexByPhoneNumber(PHONE_BOOK, ""));
+        Assert.assertEquals(Optional.empty(), findIndexByPhoneNumber(new String[]{}, ""));
+    }
+
+    @Test
+    public void findIndexByPhoneNumberNullTest() {
+        Assert.assertEquals(Optional.empty(), findIndexByPhoneNumber(null, ""));
+        Assert.assertEquals(Optional.empty(), findIndexByPhoneNumber(PHONE_BOOK, null));
+        Assert.assertEquals(Optional.empty(), findIndexByPhoneNumber(null, null));
     }
 }
