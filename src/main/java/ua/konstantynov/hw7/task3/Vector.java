@@ -31,7 +31,7 @@ public class Vector {
     public Vector() {
     }
 
-    public Vector random() {
+    public static Vector random() {
         double x = ThreadLocalRandom.current().nextDouble(-1000, 1000);
         double y = ThreadLocalRandom.current().nextDouble(-1000, 1000);
         double z = ThreadLocalRandom.current().nextDouble(-1000, 1000);
@@ -41,7 +41,7 @@ public class Vector {
     public static Vector[] randomArray(int arrayLength) {
         Vector[] array = new Vector[arrayLength];
         for (int i = 0; i < arrayLength; i++) {
-            array[i] = new Vector().random();
+            array[i] = Vector.random();
         }
         return array;
     }
@@ -50,21 +50,21 @@ public class Vector {
         return Math.sqrt(x * x + y * y + z * z);
     }
 
-    public Vector vectMul(Vector vector) {
+    public Vector crossProduct(Vector vector) {
         return new Vector(this.y * vector.z - this.z * vector.y, this.z * vector.x - this.x * vector.z,
                 this.x * vector.y - this.y * vector.x);
     }
 
-    public double cos(Vector vector) {
-        double scalMul = this.x * vector.x + this.y * vector.y + this.z * vector.z;
-        return (scalMul) / (length() * vector.length());
+    public double cosFi(Vector vector) {
+        double scalarMultiplication = this.x * vector.x + this.y * vector.y + this.z * vector.z;
+        return (scalarMultiplication) / (length() * vector.length());
     }
 
-    public Vector sum(Vector vector) {
+    public Vector addVectors(Vector vector) {
         return new Vector(this.x + vector.x, this.y + vector.y, this.z + vector.z);
     }
 
-    public Vector dif(Vector vector) {
+    public Vector divideVectors(Vector vector) {
         return new Vector(this.x - vector.x, this.y - vector.y, this.z - vector.z);
     }
 

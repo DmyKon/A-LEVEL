@@ -19,11 +19,7 @@ public class Task2 {
         try {
             g();
         } catch (IOException exception) {
-            try {
-                throw new RuntimeException("2 исключение f()");
-            } catch (RuntimeException e) {
-                e.printStackTrace();
-            }
+            throw new RuntimeException("2 исключение f()");
         }
     }
 }

@@ -1,21 +1,19 @@
 package ua.konstantynov.hw12;
 
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 import java.io.IOException;
 
-import static ua.konstantynov.hw12.Task2.f;
-import static ua.konstantynov.hw12.Task2.g;
-
 public class Task2Test {
 
-    @Test(expected = IOException.class)
-    public void gThrowsExceptionTest() throws IOException {
-        g();
+    @Test
+    public void gThrowsExceptionTest() {
+        Assertions.assertThrows(IOException.class, Task2::g);
     }
 
-    @Test(expected = RuntimeException.class)
-    public void fThrowsExceptionTest() throws RuntimeException {
-        f();
+    @Test
+    public void fThrowsExceptionTest() {
+        Assertions.assertThrows(RuntimeException.class, Task2::f);
     }
 }
