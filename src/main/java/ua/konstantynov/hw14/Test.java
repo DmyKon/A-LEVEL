@@ -11,11 +11,7 @@ public class Test {
         util.save("Value");
         System.out.println(util.get());
         Number[] arr = {1, 2, 3, 4, 0, 5, 6, 7};
-        Double[] arrD = {1.0};
-        Integer[] arrI = {1, 2};
         System.out.println(Arrays.toString(util.doubleValueIn(arr)));
-        System.out.println(Arrays.toString(util.doubleValueIn(arrI)));
-        System.out.println(Arrays.toString(util.doubleValueIn(arrD)));
         System.out.println(util.sumOfArray(Arrays.asList(arr)));
         List<Integer> list = new ArrayList<>();
         util.addNumbers(list);
