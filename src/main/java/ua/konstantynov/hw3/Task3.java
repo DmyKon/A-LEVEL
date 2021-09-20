@@ -10,7 +10,8 @@ public class Task3 {
     }
 
     public static int wordCounter(String text) {
-        String[] words = text.replaceAll("[^ a-zA-Zа-яА-ЯёЁ]", "").trim().replaceAll(" +", " ").split(" ");
+        String[] words = text.replaceAll("[^ a-zA-Zа-яА-ЯёЁ]", "").trim()
+                .replaceAll(" +", " ").split(" ");
         return words[0].equals("") ? 0 : words.length;
     }
 }
