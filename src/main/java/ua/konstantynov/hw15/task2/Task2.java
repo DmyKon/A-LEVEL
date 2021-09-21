@@ -16,7 +16,6 @@ public class Task2 {
             treeSet.add(new Box(ThreadLocalRandom.current().nextInt(0, 100)));
         }
         treeSet.add(new Box(0));
-        System.out.println();
         for (Box box : treeSet) {
             System.out.print(box.getVolume() + " ");
         }
