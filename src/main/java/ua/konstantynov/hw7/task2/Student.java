@@ -1,6 +1,6 @@
 package ua.konstantynov.hw7.task2;
 
-public class Student {
+class Student {
     String firstName;
     String lastName;
     String group;

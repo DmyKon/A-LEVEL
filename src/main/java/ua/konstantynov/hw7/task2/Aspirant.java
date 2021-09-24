@@ -1,6 +1,6 @@
 package ua.konstantynov.hw7.task2;
 
-public class Aspirant extends Student {
+class Aspirant extends Student {
     String scienceWork;
 
     @Override
