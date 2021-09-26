@@ -18,11 +18,11 @@ public class BoxService {
         String[] itemNamesArr = itemNames.split(" ");
         for (int i = 0; i < count; i++) {
             List<Item> itemList = new ArrayList<>();
-            boxList.add(new Box(itemList, ThreadLocalRandom.current().nextInt(1, 1000)));
             for (int j = 0; j < ThreadLocalRandom.current().nextInt(itemNames.length()) / 5; j++) {
                 itemList.add(new Item(itemNamesArr[ThreadLocalRandom.current().nextInt(itemNamesArr.length)],
                         ThreadLocalRandom.current().nextInt(10000)));
             }
+            boxList.add(new Box(itemList, ThreadLocalRandom.current().nextInt(1, 1000)));
         }
     }
 }
