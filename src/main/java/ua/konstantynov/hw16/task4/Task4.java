@@ -14,8 +14,8 @@ import java.util.List;
 public class Task4 {
     public static void main(String[] args) {
         List<Student> students = new ArrayList<>();
-        Student.fillListByRandomStudents(students, 50);
-        Student.printStudents(students, 5);
-        Student.setLocateOfStudents(students);
+        StudentService.fillListByRandomStudents(students, 50);
+        StudentService.printStudents(students, 5);
+        StudentService.setLocateOfStudents(students);
     }
 }
