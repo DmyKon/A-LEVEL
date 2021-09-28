@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class BoxService {
-    static boolean boxesSizeLimitFilter(int size) {
+    static boolean hasCorrectSize(Box box) {
         int min = ThreadLocalRandom.current().nextInt(1, 500);
         int max = min + ThreadLocalRandom.current().nextInt(500);
-        return size >= min && size <= max;
+        return box.getSize() >= min && box.getSize() <= max;
     }
 
-    static void fillRandomBoxes(List<Box> boxList, int count) {
+    static void fillListByRandom(List<Box> boxList, int count) {
         String itemNames = "шуба наушник парус аврора авиашкола гепард инвентарь манекен кулек " +
                 "родинка лента пудинг дамба вешалка карета сиденье одеяло медпункт кислота " +
                 "муравей атлетика загар софа страница грузовик сорока бадья обшивка ворс";

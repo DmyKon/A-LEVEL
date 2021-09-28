@@ -17,9 +17,9 @@ import java.util.List;
 public class Task5 {
     public static void main(String[] args) {
         List<Box> boxList = new ArrayList<>();
-        BoxService.fillRandomBoxes(boxList, 10);
+        BoxService.fillListByRandom(boxList, 10);
         boxList.stream()
-                .filter(box -> BoxService.boxesSizeLimitFilter(box.getSize()))
+                .filter(BoxService::hasCorrectSize)
                 .map(Box::getItem)
                 .flatMap(Collection::stream)
                 .sorted(Comparator.comparing(Item::getCost))
