@@ -7,7 +7,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cargo {
+class Cargo {
     private String name;
     private String cargoClass;
 }

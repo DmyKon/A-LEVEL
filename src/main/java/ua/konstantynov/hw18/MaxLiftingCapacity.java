@@ -7,7 +7,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MaxLiftingCapacity {
+class MaxLiftingCapacity {
     private String unit;
     private int value;
 }
