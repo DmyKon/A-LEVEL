@@ -25,14 +25,14 @@ class BoxService {
                 e.printStackTrace();
             }
             if (fileName.contains(".json")) {
-                fillFromJson(box, file);
+                fillFromJsonFile(box, file);
             } else if (fileName.contains(".xml")) {
-                fillFromXml(box, file);
+                fillFromXmlFile(box, file);
             }
         }
     }
 
-    private static void fillFromJson(Box box, File file) {
+    static void fillFromJsonFile(Box box, File file) {
         List<String[]> list = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String str;
@@ -57,7 +57,7 @@ class BoxService {
         }
     }
 
-    private static void fillFromXml(Box box, File file) {
+    static void fillFromXmlFile(Box box, File file) {
         List<String[]> list = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String str;
