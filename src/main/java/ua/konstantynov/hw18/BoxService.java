@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class BoxService {
-    static void fillFromFile(Box box, String fileName) {
+    static void fillFromResources(Box box, String fileName) {
         ClassLoader classLoader = BoxService.class.getClassLoader();
         URL resource = classLoader.getResource(fileName);
         if (resource == null) {
