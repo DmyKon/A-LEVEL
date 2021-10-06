@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 class BoxService {
+    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+
     static void fillFromResources(Box box, String fileName) {
         ClassLoader classLoader = BoxService.class.getClassLoader();
         URL resource = classLoader.getResource(fileName);
@@ -49,7 +51,6 @@ class BoxService {
         box.setMaxLiftingCapacity(maxLiftingCapacity);
         Cargo cargo = new Cargo(list.get(9)[1], list.get(10)[1]);
         box.setCargo(cargo);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         try {
             box.setDeliveryDate(simpleDateFormat.parse(list.get(12)[1]));
         } catch (ParseException e) {

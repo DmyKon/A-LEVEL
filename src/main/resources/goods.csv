@@ -1,0 +1,21 @@
+type,series,model,diagonal,screen type,country,price
+Telephone,Galaxy M32,Samsung,none,Super AMOLED,none,6799
+Telephone,iPhone 11,Apple,none,IPS,none,18499
+Telephone,G20,Nokia,none,IPS,none,4499
+Telephone,Redmi 9T,Xiaomi,none,IPS,none,4999
+Telephone,Redmi 9A,Xiaomi,none,IPS,none,2999
+Telephone,iPhone 12 Pro Max,Apple,none,OLED (Super Retina XDR),none,38499
+Telephone,Nord,OnePlus,none,Fluid AMOLED,none,13999
+Telephone,Reno5 Lite,OPPO,none,AMOLED,none,9999
+Telephone,E7i Power,Motorola,none,IPS,none,2999
+Telephone,P Smart 2021,Huawei,none,IPS,none,5499
+Television,UE43T5300AUXUA,none,43,LED,Hungary,11699
+Television,OLED55C14LB,none,55,OLED,Poland,49999
+Television,32LM6370PLA,none,32,LED,Poland,9599
+Television,43U710KB,none,43,LED,China,10999
+Television,43UP77006LB,none,43,LED,Poland,14399
+Television,,none,32,LED,China,4899
+Television,43HAK5750,none,43,LED,Turkey,9999
+Television,L32M5-5ARU,none,32,LED,China,6999
+Television,43PUS7505/12,none,43,LED,Poland,1699
+Television,24H9100T,none,24,LED,China,3699
