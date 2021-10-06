@@ -98,10 +98,10 @@ public class ShopService {
         }
     }
 
-    public static void setRandomInvoice(List<Product> electronicDevices, int limit) {
+    public static void setRandomInvoice(List<Product> productList, int limit) {
         List<Product> products = new ArrayList<>();
         for (int i = 0; i <= ThreadLocalRandom.current().nextInt(1, 6); i++) {
-            products.add(electronicDevices.get(ThreadLocalRandom.current().nextInt(electronicDevices.size())));
+            products.add(productList.get(ThreadLocalRandom.current().nextInt(productList.size())));
         }
         Invoice invoice = new Invoice();
         invoice.setProducts(products);
