@@ -22,6 +22,9 @@
 //6 Пройтись по коллекции и вызвать у каждого класса метод аннотированный @Init
 package ua.konstantynov.hw21;
 
+import ua.konstantynov.hw21.service.AutoCreateService;
+import ua.konstantynov.hw21.annotations.Init;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Map;

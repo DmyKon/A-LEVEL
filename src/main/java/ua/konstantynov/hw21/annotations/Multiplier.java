@@ -1,4 +1,6 @@
-package ua.konstantynov.hw21;
+package ua.konstantynov.hw21.annotations;
+
+import ua.konstantynov.hw21.objects.MathOperations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,6 +9,6 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-@interface Multiplier {
+public @interface Multiplier {
     MathOperations value() default MathOperations.MULTIPLY;
 }

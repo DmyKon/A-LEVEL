@@ -1,14 +1,18 @@
-package ua.konstantynov.hw21;
+package ua.konstantynov.hw21.service;
 
 import org.reflections.Reflections;
+import ua.konstantynov.hw21.Main;
+import ua.konstantynov.hw21.annotations.AutoCreate;
+import ua.konstantynov.hw21.annotations.Multiplier;
+import ua.konstantynov.hw21.objects.MathOperations;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-class AutoCreateService {
-    static Map<String, Object> search() {
+public abstract class AutoCreateService {
+    public static Map<String, Object> search() {
         Map<String, Object> map = new HashMap<>();
         Reflections reflections = new Reflections(Main.class.getPackage().getName());
         Set<Class<?>> classes = reflections.getTypesAnnotatedWith(AutoCreate.class);

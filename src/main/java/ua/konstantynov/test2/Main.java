@@ -50,6 +50,7 @@ import ua.konstantynov.test2.objects.Product;
 import ua.konstantynov.test2.service.ShopService;
 import ua.konstantynov.test2.service.Util;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -65,13 +66,15 @@ public class Main {
         System.out.println("Количество проданных товаров: Telephone = "
                 + Util.countOfProductSoldByCategory("Telephone") +
                 ", Television = " + Util.countOfProductSoldByCategory("Television"));
-        System.out.println("Сумма самого маленького чека = " + Util.minimumCheckAmount() +
-                ", Клиент = " + Util.customerInfoByCheckAmount(Util.minimumCheckAmount()));
+        System.out.println("Сумма самого маленького чека = " + Util.minimumCheckAmountAndCustomer().keySet() +
+                ", Клиент = " + Util.minimumCheckAmountAndCustomer().values());
         System.out.println("Сумма всех покупок = " + Util.totalAmountSold());
         System.out.println("Количество чеков с категорией retail = " + Util.retailCheckCount());
         System.out.println("Чеки, которые содержат только один тип товара: " + Util.onlyOneCategoryChecks());
         System.out.println("Первые три чека сделанные покупателями: " +
-                ShopService.getInvoices().stream().limit(3).collect(Collectors.toList()));
+                ShopService.getInvoices().stream()
+                        .sorted(Comparator.comparing(invoice -> invoice.getDateTime().getTime()))
+                        .limit(3).collect(Collectors.toList()));
         System.out.println("Чеки купленные пользователями младше 18 лет " + Util.lowAgeCheckInfo());
         System.out.println("Сортировка: " + Util.sorting());
     }

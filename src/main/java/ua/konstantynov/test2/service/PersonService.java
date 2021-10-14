@@ -4,7 +4,7 @@ import ua.konstantynov.test2.objects.Customer;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class PersonService {
+public abstract class PersonService {
     public static Customer setRandom() {
         String[] email = ("tymokomor thosiitit eeforkokos tythoforfor kossithotho mormorforee ititkoty formortykos " +
                 "simokoi kokuiit forsieezo kukumorko zomokofor komorzozo morsiiit forsikosmo sikueesi itzoitee " +

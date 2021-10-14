@@ -1,16 +1,14 @@
 package ua.konstantynov.test2.service;
 
 import ua.konstantynov.test2.objects.Customer;
+import ua.konstantynov.test2.objects.InvoiceType;
 import ua.konstantynov.test2.objects.Product;
 import ua.konstantynov.test2.objects.Invoice;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
-public class Util {
+public abstract class Util {
     public static long countOfProductSoldByCategory(String productCategory) {
         return ShopService.getInvoices().stream()
                 .map(Invoice::getProducts)
@@ -18,18 +16,19 @@ public class Util {
                 .filter(x -> x.getProductType().equals(productCategory)).count();
     }
 
-    public static Integer minimumCheckAmount() {
-        return ShopService.getInvoices().stream()
-                .map(Invoice::getProducts)
-                .map(x -> x.stream().mapToInt(Product::getPrice).sum())
-                .reduce(Integer.MAX_VALUE, Integer::min);
-    }
-
-    public static List<Customer> customerInfoByCheckAmount(int sum) {
-        return ShopService.getInvoices().stream()
-                .filter(x -> x.getProducts().stream().mapToInt(Product::getPrice).sum() == sum)
-                .map(Invoice::getCustomer)
-                .collect(Collectors.toList());
+    public static Map<Integer, Optional<Customer>> minimumCheckAmountAndCustomer() {
+        Map<Integer, Optional<Customer>> map = new HashMap<>();
+        if (!ShopService.getInvoices().isEmpty()) {
+            Integer sum = ShopService.getInvoices().stream()
+                    .map(Invoice::getProducts)
+                    .map(x -> x.stream().mapToInt(Product::getPrice).sum())
+                    .reduce(Integer.MAX_VALUE, Integer::min);
+            map.put(sum, ShopService.getInvoices().stream()
+                    .filter(x -> x.getProducts().stream().mapToInt(Product::getPrice).sum() == sum)
+                    .map(Invoice::getCustomer)
+                    .findFirst());
+        }
+        return map;
     }
 
     public static Integer totalAmountSold() {
@@ -41,26 +40,8 @@ public class Util {
 
     public static long retailCheckCount() {
         return ShopService.getInvoices().stream()
-                .filter(x -> x.getType().contains("retail"))
+                .filter(x -> x.getType().equals(InvoiceType.RETAIL))
                 .count();
-    }
-
-    public static List<Invoice> lowAgeCheckInfo() {
-        return ShopService.getInvoices().stream()
-                .filter(x -> x.getCustomer().getAge() < 18)
-                .peek(x -> x.setType("low_age"))
-                .collect(Collectors.toList());
-    }
-
-    public static List<Invoice> sorting() {
-        return ShopService.getInvoices().stream()
-                .sorted(Comparator.comparing((Invoice x) -> x.getCustomer().getAge())
-                        .thenComparing(x -> x.getProducts().size())
-                        .thenComparing(x -> x.getProducts().stream()
-                                .map(Product::getPrice)
-                                .mapToInt(z -> z)
-                                .sum()))
-                .collect(Collectors.toList());
     }
 
     public static List<Invoice> onlyOneCategoryChecks() {
@@ -78,5 +59,23 @@ public class Util {
                     .collect(Collectors.toList()));
         }
         return list;
+    }
+
+    public static List<Invoice> lowAgeCheckInfo() {
+        return ShopService.getInvoices().stream()
+                .filter(x -> x.getCustomer().getAge() < 18)
+                .peek(x -> x.setType(InvoiceType.LOW_AGE))
+                .collect(Collectors.toList());
+    }
+
+    public static List<Invoice> sorting() {
+        return ShopService.getInvoices().stream()
+                .sorted(Comparator.comparing((Invoice x) -> x.getCustomer().getAge()).reversed()
+                        .thenComparing(x -> x.getProducts().size())
+                        .thenComparing(x -> x.getProducts().stream()
+                                .map(Product::getPrice)
+                                .mapToInt(z -> z)
+                                .sum()))
+                .collect(Collectors.toList());
     }
 }

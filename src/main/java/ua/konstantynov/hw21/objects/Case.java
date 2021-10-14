@@ -1,10 +1,13 @@
-package ua.konstantynov.hw21;
+package ua.konstantynov.hw21.objects;
 
 import lombok.ToString;
+import ua.konstantynov.hw21.annotations.AutoCreate;
+import ua.konstantynov.hw21.annotations.Init;
+import ua.konstantynov.hw21.annotations.Multiplier;
 
 @ToString
 @AutoCreate
-class Case {
+public class Case {
     @Multiplier(MathOperations.ADDITION)
     private float caseSize = 500;
     int casePrice = 10000;

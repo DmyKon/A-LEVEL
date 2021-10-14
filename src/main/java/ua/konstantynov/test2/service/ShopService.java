@@ -1,5 +1,6 @@
 package ua.konstantynov.test2.service;
 
+import ua.konstantynov.test2.exceptions.IncorrectValueException;
 import ua.konstantynov.test2.objects.*;
 
 import java.io.*;
@@ -9,7 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class ShopService {
+public abstract class ShopService {
     private static final List<Invoice> invoices = new ArrayList<>();
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("[dd MMMMM yyyy kk:mm:ss]");
 
@@ -24,13 +25,13 @@ public class ShopService {
             throw new IllegalArgumentException("file not found! " + fileName);
         } else {
             List<String[]> list = new ArrayList<>();
-            int type = 0;
-            int series = 0;
-            int model = 0;
-            int diagonal = 0;
-            int screenType = 0;
-            int country = 0;
-            int price = 0;
+            int type = -1;
+            int series = -1;
+            int model = -1;
+            int diagonal = -1;
+            int screenType = -1;
+            int country = -1;
+            int price = -1;
             try (BufferedReader reader = new BufferedReader(new FileReader(new File(resource.toURI())))) {
                 String str;
                 String[] csvTitle = reader.readLine().split(",");
@@ -89,7 +90,7 @@ public class ShopService {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(
                 "src" + File.separator + "main" + File.separator + "resources" +
                         File.separator + "log.txt", true))) {
-            bufferedWriter.write(dateFormat.format(Calendar.getInstance().getTime()) +
+            bufferedWriter.write(dateFormat.format(invoice.getDateTime()) +
                     " [" + invoice.getCustomer() + "] [Invoice(" + invoice.getProducts() +
                     ", type=" + invoice.getType() + ")]\n");
             bufferedWriter.flush();
@@ -107,10 +108,11 @@ public class ShopService {
         invoice.setProducts(products);
         invoice.setCustomer(PersonService.setRandom());
         if (products.stream().mapToInt(Product::getPrice).sum() > limit) {
-            invoice.setType("wholesale");
+            invoice.setType(InvoiceType.WHOLESALE);
         } else {
-            invoice.setType("retail");
+            invoice.setType(InvoiceType.RETAIL);
         }
+        invoice.setDateTime(new Date());
         createLog(invoice);
         invoices.add(invoice);
     }

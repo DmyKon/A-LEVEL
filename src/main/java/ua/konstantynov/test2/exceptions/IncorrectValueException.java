@@ -1,4 +1,4 @@
-package ua.konstantynov.test2.objects;
+package ua.konstantynov.test2.exceptions;
 
 public class IncorrectValueException extends IllegalArgumentException {
     public IncorrectValueException(String message) {
