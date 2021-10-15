@@ -8,7 +8,7 @@ import ua.konstantynov.test2.objects.Invoice;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public abstract class Util {
+public class Util {
     public static long countOfProductSoldByCategory(String productCategory) {
         return ShopService.getInvoices().stream()
                 .map(Invoice::getProducts)

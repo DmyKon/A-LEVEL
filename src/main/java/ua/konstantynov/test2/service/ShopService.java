@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
-public abstract class ShopService {
+public class ShopService {
     private static final List<Invoice> invoices = new ArrayList<>();
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("[dd MMMMM yyyy kk:mm:ss]");
 

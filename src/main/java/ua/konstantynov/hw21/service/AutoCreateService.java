@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class AutoCreateService {
+public class AutoCreateService {
     public static Map<String, Object> search() {
         Map<String, Object> map = new HashMap<>();
         Reflections reflections = new Reflections(Main.class.getPackage().getName());
