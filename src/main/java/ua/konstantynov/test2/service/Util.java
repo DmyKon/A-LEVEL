@@ -1,5 +1,6 @@
 package ua.konstantynov.test2.service;
 
+import javafx.util.Pair;
 import ua.konstantynov.test2.objects.Customer;
 import ua.konstantynov.test2.objects.InvoiceType;
 import ua.konstantynov.test2.objects.Product;
@@ -16,19 +17,17 @@ public class Util {
                 .filter(x -> x.getProductType().equals(productCategory)).count();
     }
 
-    public static Map<Integer, Optional<Customer>> minimumCheckAmountAndCustomer() {
-        Map<Integer, Optional<Customer>> map = new HashMap<>();
-        if (!ShopService.getInvoices().isEmpty()) {
-            Integer sum = ShopService.getInvoices().stream()
-                    .map(Invoice::getProducts)
-                    .map(x -> x.stream().mapToInt(Product::getPrice).sum())
-                    .reduce(Integer.MAX_VALUE, Integer::min);
-            map.put(sum, ShopService.getInvoices().stream()
-                    .filter(x -> x.getProducts().stream().mapToInt(Product::getPrice).sum() == sum)
-                    .map(Invoice::getCustomer)
-                    .findFirst());
-        }
-        return map;
+    public static Pair<Integer, Optional<Customer>> minimumCheckAmountAndCustomer() {
+        int sum;
+        return new Pair<>(
+                sum = ShopService.getInvoices().isEmpty() ? 0 : ShopService.getInvoices().stream()
+                        .map(Invoice::getProducts)
+                        .map(x -> x.stream().mapToInt(Product::getPrice).sum())
+                        .reduce(Integer.MAX_VALUE, Integer::min),
+                ShopService.getInvoices().stream()
+                        .filter(x -> x.getProducts().stream().mapToInt(Product::getPrice).sum() == sum)
+                        .map(Invoice::getCustomer)
+                        .findFirst());
     }
 
     public static Integer totalAmountSold() {
