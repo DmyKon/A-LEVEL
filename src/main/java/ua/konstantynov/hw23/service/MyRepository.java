@@ -4,101 +4,12 @@ import ua.konstantynov.hw23.objects.Device;
 import ua.konstantynov.hw23.objects.Factory;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class MyRepository {
-    private static final String URL = "jdbc:mysql://localhost:3306/a_level";
-    private static final String USER = "root";
-    private static final String PASSWORD = "root";
-    private static Connection connection;
-    private static final List<String> factoryIds = new ArrayList<>();
-    private static final List<String> deviceIds = new ArrayList<>();
-
-    public static List<String> getDeviceIds() {
-        return deviceIds;
-    }
-
-    public static List<String> getFactoryIds() {
-        return factoryIds;
-    }
-
-    static {
+public class MyRepository extends AbstractRepository {
+    public static void fillFactoryTable(int count) {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void closeConnection() {
-        try {
-            if (connection != null) {
-                connection.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void createAndFillTables(int factoryCount, int deviceCount) {
-        MyRepository.createFactoryTable();
-        MyRepository.createDeviceTable();
-        MyRepository.fillFactoryTable(factoryCount);
-        MyRepository.fillFactoryIdList();
-        MyRepository.fillDeviceTable(deviceCount);
-        MyRepository.fillDeviceIdList();
-        closeConnection();
-    }
-
-    private static void createFactoryTable() {
-        try {
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            String sql = "CREATE TABLE `a_level`.`завод` (\n" +
-                    "  `завод_id` VARCHAR(36) NOT NULL,\n" +
-                    "  `Название` VARCHAR(45) NULL,\n" +
-                    "  `Страна` VARCHAR(45) NULL,\n" +
-                    "  PRIMARY KEY (`завод_id`),\n" +
-                    "  UNIQUE INDEX `завод_id_UNIQUE` (`завод_id` ASC) VISIBLE);\n";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void createDeviceTable() {
-        try {
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            String sql = "CREATE TABLE `устройство` (\n" +
-                    "  `устройство_id` varchar(36) NOT NULL,\n" +
-                    "  `Тип` varchar(45) DEFAULT NULL,\n" +
-                    "  `Название_модели` varchar(45) DEFAULT NULL,\n" +
-                    "  `Цена` decimal(8,2) DEFAULT NULL,\n" +
-                    "  `Дата_создания` date DEFAULT NULL,\n" +
-                    "  `Описание` text,\n" +
-                    "  `Наличие_на_складе` bit(1) DEFAULT NULL,\n" +
-                    "  `Идентификатор_завода` varchar(36) DEFAULT NULL,\n" +
-                    "  PRIMARY KEY (`устройство_id`),\n" +
-                    "  UNIQUE KEY `устройство_id_UNIQUE` (`устройство_id`),\n" +
-                    "  KEY `Идентификатор завода_idx` (`Идентификатор_завода`),\n" +
-                    "  CONSTRAINT `Идентификатор_завода` FOREIGN KEY (`Идентификатор_завода`)" +
-                    "  REFERENCES `завод` (`завод_id`)\n" +
-                    ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void fillFactoryTable(int count) {
-        try {
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
             String[] factoryName = {"BRGr", "Pzza", "SLO", "DG"};
             String[] factoryCountry = {"USA", "Korea", "Ukraine", "Italy"};
             PreparedStatement preparedStatement = null;
@@ -120,9 +31,8 @@ public class MyRepository {
         }
     }
 
-    private static void fillDeviceTable(int count) {
+    public static void fillDeviceTable(int count) {
         try {
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
             String[] deviceType = {"TV", "Phone", "Fridge", "Watch"};
             String[] deviceModelName = {"A-53453", "B-43543", "C-63463", "D-63443", "F-5435", "G-8654", "H-87126"};
             String[] deviceCreationDate = {"2000-12-30", "2021-03-03", "2009-08-14", "2005-11-21", "1980-05-23"};
@@ -173,39 +83,8 @@ public class MyRepository {
         }
     }
 
-    public static void fillFactoryIdList() {
-        try {
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            String sql = "SELECT завод_id FROM `a_level`.`завод`;";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                factoryIds.add(resultSet.getString("завод_id"));
-            }
-            preparedStatement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void fillDeviceIdList() {
-        try {
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            String sql = "SELECT устройство_id FROM `a_level`.`устройство`;";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                deviceIds.add(resultSet.getString("устройство_id"));
-            }
-            preparedStatement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void dropTables() {
         try {
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
             String sql = "DROP TABLE `a_level`.`устройство`;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.executeUpdate();
@@ -221,7 +100,6 @@ public class MyRepository {
     public static Factory getFactory(String id) {
         Factory factory = new Factory();
         try {
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
             String sql = "SELECT * FROM `a_level`.`завод` WHERE завод_id = '" + id + "';";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -237,11 +115,9 @@ public class MyRepository {
         return factory;
     }
 
-
     public static Device getDevice(String id) {
         Device device = new Device();
         try {
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
             String sql = "SELECT * FROM `a_level`.`устройство` WHERE устройство_id = '" + id + "';";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -264,7 +140,6 @@ public class MyRepository {
 
     public static void updateDevice(String id, String column, String value) {
         try {
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
             String sql = "UPDATE `a_level`.`устройство` SET `" + column + "` = '" + value + "' " +
                     "WHERE (`устройство_id` = '" + id + "');";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -277,7 +152,6 @@ public class MyRepository {
 
     public static void deleteDevice(String id) {
         try {
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
             String sql = "DELETE FROM `a_level`.`устройство` " +
                     "WHERE (`устройство_id` = '" + id + "');";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -291,7 +165,6 @@ public class MyRepository {
 
     public static void getDevicesListByFactoryId(String id) {
         try {
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
             String sql = "SELECT * FROM `a_level`.`устройство` WHERE Идентификатор_завода = '" + id + "';";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -310,7 +183,6 @@ public class MyRepository {
 
     public static void getCountAndSumForEachFactory() {
         try {
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
             String sql = "SELECT Идентификатор_завода, SUM(Цена) AS Сумма, COUNT(Идентификатор_завода) AS Количество " +
                     "FROM a_level.устройство " +
                     "GROUP BY Идентификатор_завода;";

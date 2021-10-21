@@ -23,6 +23,7 @@
 //   6. Достает количество устройств, сумму всех устройств для каждого завода (group by)
 package ua.konstantynov.hw23;
 
+import ua.konstantynov.hw23.service.CreateTable;
 import ua.konstantynov.hw23.service.MyRepository;
 
 import java.sql.*;
@@ -30,7 +31,7 @@ import java.sql.*;
 public class Main {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         MyRepository.dropTables();
-        MyRepository.createAndFillTables(4,10); //1
+        CreateTable.createAndFillTables(4,10); //1
         System.out.println(MyRepository.getDevice(MyRepository.getDeviceIds().get(0))); //2
         MyRepository.updateDevice(MyRepository.getDeviceIds().get(0), "Тип", "TEST TEST TEST"); //3
         System.out.println(MyRepository.getDevice(MyRepository.getDeviceIds().get(0)));
