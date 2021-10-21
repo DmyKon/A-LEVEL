@@ -165,7 +165,9 @@ public class MyRepository extends AbstractRepository {
 
     public static void getDevicesListByFactoryId(String id) {
         try {
-            String sql = "SELECT * FROM `a_level`.`устройство` WHERE Идентификатор_завода = '" + id + "';";
+            String sql = "SELECT * FROM устройство\n" +
+                    "INNER JOIN завод ON Идентификатор_завода = '" + id + "'\n" +
+                    "GROUP BY устройство_id;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
             System.out.println("Список устройств завода id = " + id);
