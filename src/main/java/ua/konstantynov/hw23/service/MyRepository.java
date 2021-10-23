@@ -14,7 +14,7 @@ public class MyRepository extends AbstractRepository {
             String[] factoryCountry = {"USA", "Korea", "Ukraine", "Italy"};
             PreparedStatement preparedStatement = null;
             for (int i = 0; i < count; i++) {
-                String sql = "INSERT INTO a_level.завод (завод_id, Название, Страна) VALUES (?, ?, ?);";
+                String sql = "INSERT INTO a_level.factory (factory_id, name, country) VALUES (?, ?, ?);";
                 preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setString(1, UUID.randomUUID().toString());
                 preparedStatement.setString(2,
@@ -54,9 +54,9 @@ public class MyRepository extends AbstractRepository {
                     "decisively especially. Exeter itself object matter if on mr in."};
             PreparedStatement preparedStatement = null;
             for (int i = 0; i < count; i++) {
-                String sql = "INSERT INTO `a_level`.`устройство` (`устройство_id`, `Тип`, " +
-                        "`Название_модели`, `Цена`, `Дата_создания`, `Описание`, `Наличие_на_складе`, " +
-                        "`Идентификатор_завода`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+                String sql = "INSERT INTO `a_level`.`device` (`device_id`, `type`, " +
+                        "`model`, `price`, `date`, `description`, `in_stock`, " +
+                        "`factory_identifier`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
                 preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setString(1, UUID.randomUUID().toString());
                 preparedStatement.setString(2,
@@ -85,10 +85,10 @@ public class MyRepository extends AbstractRepository {
 
     public static void dropTables() {
         try {
-            String sql = "DROP TABLE `a_level`.`устройство`;";
+            String sql = "DROP TABLE `a_level`.`device`;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.executeUpdate();
-            sql = "DROP TABLE `a_level`.`завод`;";
+            sql = "DROP TABLE `a_level`.`factory`;";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -100,13 +100,14 @@ public class MyRepository extends AbstractRepository {
     public static Factory getFactory(String id) {
         Factory factory = new Factory();
         try {
-            String sql = "SELECT * FROM `a_level`.`завод` WHERE завод_id = '" + id + "';";
+            String sql = "SELECT * FROM `a_level`.`factory` WHERE factory_id = ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                factory.setId(resultSet.getString("завод_id"));
-                factory.setName(resultSet.getString("Название"));
-                factory.setCountry(resultSet.getString("Страна"));
+                factory.setId(resultSet.getString("factory_id"));
+                factory.setName(resultSet.getString("name"));
+                factory.setCountry(resultSet.getString("country"));
             }
             preparedStatement.close();
         } catch (SQLException e) {
@@ -118,18 +119,19 @@ public class MyRepository extends AbstractRepository {
     public static Device getDevice(String id) {
         Device device = new Device();
         try {
-            String sql = "SELECT * FROM `a_level`.`устройство` WHERE устройство_id = '" + id + "';";
+            String sql = "SELECT * FROM `a_level`.`device` WHERE device_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                device.setId(resultSet.getString("устройство_id"));
-                device.setType(resultSet.getString("Тип"));
-                device.setDeviceModel(resultSet.getString("Название_модели"));
-                device.setPrice(resultSet.getDouble("Цена"));
-                device.setCreationDate(resultSet.getDate("Дата_создания"));
-                device.setDescription(resultSet.getString("Описание"));
-                device.setIsInStock(resultSet.getBoolean("Наличие_на_складе"));
-                device.setFactory(getFactory(resultSet.getString("Идентификатор_завода")));
+                device.setId(resultSet.getString("device_id"));
+                device.setType(resultSet.getString("type"));
+                device.setDeviceModel(resultSet.getString("model"));
+                device.setPrice(resultSet.getDouble("price"));
+                device.setCreationDate(resultSet.getDate("date"));
+                device.setDescription(resultSet.getString("description"));
+                device.setIsInStock(resultSet.getBoolean("in_stock"));
+                device.setFactory(getFactory(resultSet.getString("factory_identifier")));
             }
             preparedStatement.close();
         } catch (SQLException e) {
@@ -140,9 +142,11 @@ public class MyRepository extends AbstractRepository {
 
     public static void updateDevice(String id, String column, String value) {
         try {
-            String sql = "UPDATE `a_level`.`устройство` SET `" + column + "` = '" + value + "' " +
-                    "WHERE (`устройство_id` = '" + id + "');";
+            String sql = String.format("UPDATE `a_level`.`device` SET %s = ? " +
+                    "WHERE (`device_id` = ?);", column);
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, value);
+            preparedStatement.setString(2, id);
             preparedStatement.executeUpdate();
             preparedStatement.close();
         } catch (SQLException e) {
@@ -152,9 +156,10 @@ public class MyRepository extends AbstractRepository {
 
     public static void deleteDevice(String id) {
         try {
-            String sql = "DELETE FROM `a_level`.`устройство` " +
-                    "WHERE (`устройство_id` = '" + id + "');";
+            String sql = "DELETE FROM `a_level`.`device` " +
+                    "WHERE (`device_id` = ?);";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, id);
             preparedStatement.executeUpdate();
             preparedStatement.close();
             deviceIds.remove(id);
@@ -165,10 +170,11 @@ public class MyRepository extends AbstractRepository {
 
     public static void getDevicesListByFactoryId(String id) {
         try {
-            String sql = "SELECT * FROM устройство\n" +
-                    "INNER JOIN завод ON Идентификатор_завода = '" + id + "'\n" +
-                    "GROUP BY устройство_id;";
+            String sql = "SELECT * FROM device\n" +
+                    "INNER JOIN factory \n" +
+                    "ON factory_identifier = factory_id AND factory_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             System.out.println("Список устройств завода id = " + id);
             while (resultSet.next()) {
@@ -185,16 +191,16 @@ public class MyRepository extends AbstractRepository {
 
     public static void getCountAndSumForEachFactory() {
         try {
-            String sql = "SELECT Идентификатор_завода, SUM(Цена) AS Сумма, COUNT(Идентификатор_завода) AS Количество " +
-                    "FROM a_level.устройство " +
-                    "GROUP BY Идентификатор_завода;";
+            String sql = "SELECT factory_identifier, SUM(price) AS total, COUNT(factory_identifier) AS count " +
+                    "FROM a_level.device " +
+                    "GROUP BY factory_identifier;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 System.out.println(
-                        "Идентификатор_завода = " + resultSet.getString("Идентификатор_завода") +
-                                " Сумма = " + resultSet.getString("Сумма") +
-                                " Количество = " + resultSet.getString("Количество"));
+                        "Идентификатор завода = " + resultSet.getString("factory_identifier") +
+                                " Сумма = " + resultSet.getString("total") +
+                                " Количество = " + resultSet.getString("count"));
             }
             preparedStatement.close();
         } catch (SQLException e) {

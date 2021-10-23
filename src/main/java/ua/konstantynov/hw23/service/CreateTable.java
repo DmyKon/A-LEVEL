@@ -16,12 +16,12 @@ public class CreateTable extends AbstractRepository {
 
     public static void createFactoryTable() {
         try {
-            String sql = "CREATE TABLE `a_level`.`завод` (\n" +
-                    "  `завод_id` VARCHAR(36) NOT NULL,\n" +
-                    "  `Название` VARCHAR(45) NULL,\n" +
-                    "  `Страна` VARCHAR(45) NULL,\n" +
-                    "  PRIMARY KEY (`завод_id`),\n" +
-                    "  UNIQUE INDEX `завод_id_UNIQUE` (`завод_id` ASC) VISIBLE);\n";
+            String sql = "CREATE TABLE `a_level`.`factory` (\n" +
+                    "  `factory_id` VARCHAR(36) NOT NULL,\n" +
+                    "  `name` VARCHAR(45) NULL,\n" +
+                    "  `country` VARCHAR(45) NULL,\n" +
+                    "  PRIMARY KEY (`factory_id`),\n" +
+                    "  UNIQUE INDEX `factory_id_UNIQUE` (`factory_id` ASC) VISIBLE);\n";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -32,20 +32,20 @@ public class CreateTable extends AbstractRepository {
 
     public static void createDeviceTable() {
         try {
-            String sql = "CREATE TABLE `устройство` (\n" +
-                    "  `устройство_id` varchar(36) NOT NULL,\n" +
-                    "  `Тип` varchar(45) DEFAULT NULL,\n" +
-                    "  `Название_модели` varchar(45) DEFAULT NULL,\n" +
-                    "  `Цена` decimal(8,2) DEFAULT NULL,\n" +
-                    "  `Дата_создания` date DEFAULT NULL,\n" +
-                    "  `Описание` text,\n" +
-                    "  `Наличие_на_складе` bit(1) DEFAULT NULL,\n" +
-                    "  `Идентификатор_завода` varchar(36) DEFAULT NULL,\n" +
-                    "  PRIMARY KEY (`устройство_id`),\n" +
-                    "  UNIQUE KEY `устройство_id_UNIQUE` (`устройство_id`),\n" +
-                    "  KEY `Идентификатор завода_idx` (`Идентификатор_завода`),\n" +
-                    "  CONSTRAINT `Идентификатор_завода` FOREIGN KEY (`Идентификатор_завода`)" +
-                    "  REFERENCES `завод` (`завод_id`)\n" +
+            String sql = "CREATE TABLE `device` (\n" +
+                    "  `device_id` varchar(36) NOT NULL,\n" +
+                    "  `type` varchar(45) DEFAULT NULL,\n" +
+                    "  `model` varchar(45) DEFAULT NULL,\n" +
+                    "  `price` decimal(8,2) DEFAULT NULL,\n" +
+                    "  `date` date DEFAULT NULL,\n" +
+                    "  `description` text,\n" +
+                    "  `in_stock` bit(1) DEFAULT NULL,\n" +
+                    "  `factory_identifier` varchar(36) DEFAULT NULL,\n" +
+                    "  PRIMARY KEY (`device_id`),\n" +
+                    "  UNIQUE KEY `device_id_UNIQUE` (`device_id`),\n" +
+                    "  KEY `factory_identifier factory_idx` (`factory_identifier`),\n" +
+                    "  CONSTRAINT `factory_identifier` FOREIGN KEY (`factory_identifier`)" +
+                    "  REFERENCES `factory` (`factory_id`)\n" +
                     ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.executeUpdate();
@@ -57,11 +57,11 @@ public class CreateTable extends AbstractRepository {
 
     public static void fillFactoryIdList() {
         try {
-            String sql = "SELECT завод_id FROM `a_level`.`завод`;";
+            String sql = "SELECT factory_id FROM `a_level`.`factory`;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                factoryIds.add(resultSet.getString("завод_id"));
+                factoryIds.add(resultSet.getString("factory_id"));
             }
             preparedStatement.close();
         } catch (SQLException e) {
@@ -71,11 +71,11 @@ public class CreateTable extends AbstractRepository {
 
     public static void fillDeviceIdList() {
         try {
-            String sql = "SELECT устройство_id FROM `a_level`.`устройство`;";
+            String sql = "SELECT device_id FROM `a_level`.`device`;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                deviceIds.add(resultSet.getString("устройство_id"));
+                deviceIds.add(resultSet.getString("device_id"));
             }
             preparedStatement.close();
         } catch (SQLException e) {

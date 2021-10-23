@@ -33,7 +33,7 @@ public class Main {
         MyRepository.dropTables();
         CreateTable.createAndFillTables(4,10); //1
         System.out.println(MyRepository.getDevice(MyRepository.getDeviceIds().get(0))); //2
-        MyRepository.updateDevice(MyRepository.getDeviceIds().get(0), "Тип", "TEST TEST TEST"); //3
+        MyRepository.updateDevice(MyRepository.getDeviceIds().get(0), "type", "TEST TEST TEST"); //3
         System.out.println(MyRepository.getDevice(MyRepository.getDeviceIds().get(0)));
         MyRepository.deleteDevice(MyRepository.getDeviceIds().get(0)); //4
         System.out.println(MyRepository.getDevice(MyRepository.getDeviceIds().get(0)));
