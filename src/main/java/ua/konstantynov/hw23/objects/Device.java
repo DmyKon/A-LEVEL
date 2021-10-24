@@ -16,8 +16,8 @@ public class Device {
     private String type;
     private String deviceModel;
     private Double price;
-    private Date CreationDate;
+    private Date creationDate;
     private String description;
-    private boolean IsInStock;
+    private boolean isInStock;
     private Factory factory;
 }

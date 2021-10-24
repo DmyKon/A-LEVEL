@@ -130,7 +130,7 @@ public class MyRepository extends AbstractRepository {
                 device.setPrice(resultSet.getDouble("price"));
                 device.setCreationDate(resultSet.getDate("date"));
                 device.setDescription(resultSet.getString("description"));
-                device.setIsInStock(resultSet.getBoolean("in_stock"));
+                device.setInStock(resultSet.getBoolean("in_stock"));
                 device.setFactory(getFactory(resultSet.getString("factory_identifier")));
             }
             preparedStatement.close();
