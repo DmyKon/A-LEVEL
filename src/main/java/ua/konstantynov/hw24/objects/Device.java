@@ -28,13 +28,13 @@ public class Device {
     private Double price;
 
     @Column (name = "date")
-    private Date CreationDate;
+    private Date creationDate;
     private String description;
 
     @Column (name = "in_stock")
-    private boolean IsInStock;
+    private boolean isInStock;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "factory_id")
     private Factory factory;
 }

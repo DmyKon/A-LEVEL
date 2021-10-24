@@ -15,10 +15,10 @@ public class HibernateSessionFactoryUtil {
     private static SessionFactory sessionFactory;
 
     public static SessionFactory getSessionFactory() {
-        if (sessionFactory != null) {
+        if (sessionFactory == null) {
             try {
                 Configuration configuration = new Configuration().configure();
-                Reflections reflections = new Reflections("models");
+                Reflections reflections = new Reflections("objects");
                 Set<Class<?>> entities = reflections.getTypesAnnotatedWith(Entity.class);
                 for (Class<?> entity : entities) {
                     configuration.addAnnotatedClass(entity);
