@@ -17,11 +17,23 @@ public class DeviceService {
         return DEVICE_DAO.getById(id);
     }
 
+    public void change(String id, String column, String value) {
+        DEVICE_DAO.change(id, column, value);
+    }
+
+    public List<Device> getDevicesListByFactoryId(String id) {
+        return DEVICE_DAO.getDevicesListByFactoryId(id);
+    }
+
+    public static void getCountAndSumForEachFactory() {
+        DEVICE_DAO.getCountAndSumForEachFactory();
+    }
+
     public List<Device> getAll() {
         return DEVICE_DAO.getAll();
     }
 
     public void delete(Device device) {
-        DEVICE_DAO.deleteById(device.getId());
+        DEVICE_DAO.delete(device.getId());
     }
 }
