@@ -2,6 +2,7 @@ package ua.konstantynov.hw24.service;
 
 import ua.konstantynov.hw24.dao.DeviceDao;
 import ua.konstantynov.hw24.objects.Device;
+import ua.konstantynov.hw24.objects.DeviceDTO;
 
 import java.util.List;
 
@@ -25,8 +26,8 @@ public class DeviceService {
         return DEVICE_DAO.getDevicesListByFactoryId(id);
     }
 
-    public static void getCountAndSumForEachFactory() {
-        DEVICE_DAO.getCountAndSumForEachFactory();
+    public List<DeviceDTO> getCountAndSumForEachFactory() {
+        return DEVICE_DAO.getCountAndSumForEachFactory();
     }
 
     public List<Device> getAll() {

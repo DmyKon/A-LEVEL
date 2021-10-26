@@ -24,15 +24,15 @@
 package ua.konstantynov.hw24;
 
 import ua.konstantynov.hw24.objects.Device;
+import ua.konstantynov.hw24.objects.DeviceDTO;
+import ua.konstantynov.hw24.service.Create;
 import ua.konstantynov.hw24.service.DeviceService;
-import ua.konstantynov.hw24.service.FactoryService;
 
 public class Main {
     private static final DeviceService deviceService = new DeviceService();
-    private static final FactoryService factoryService = new FactoryService();
 
     public static void main(String[] args) {
-
+        Create.fillTables();
         Device device = deviceService.getAll().get(0);
         System.out.println(deviceService.getById(device.getId()));
         deviceService.change(device.getId(), "type", "TEST TEST TEST");
@@ -41,11 +41,15 @@ public class Main {
         System.out.println("Device count: =" + deviceService.getAll().size());
         System.out.println("Deleting Device...");
         deviceService.delete(device);
-        System.out.println("Device count: =" + deviceService.getAll().size());
+        System.out.println("Device count: = " + deviceService.getAll().size());
         System.out.println();
         System.out.println("Список устройств завода id = " + device.getFactory().getId());
         for (Device dev : deviceService.getDevicesListByFactoryId(device.getFactory().getId())) {
             System.out.println(dev);
+        }
+        System.out.println();
+        for (DeviceDTO dto : deviceService.getCountAndSumForEachFactory()) {
+            System.out.println(dto);
         }
     }
 }

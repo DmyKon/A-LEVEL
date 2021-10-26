@@ -10,4 +10,8 @@ public class FactoryService {
         FACTORY_DAO.save(factory);
         return factory.getId();
     }
+
+    public Factory getById(String id) {
+        return FACTORY_DAO.getById(id);
+    }
 }

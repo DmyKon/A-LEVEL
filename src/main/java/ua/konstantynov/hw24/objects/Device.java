@@ -17,7 +17,7 @@ public class Device {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "device_id")
+    @Column(name = "device_id", columnDefinition = "varchar(36)")
     private String id;
     private String type;
 
@@ -32,9 +32,20 @@ public class Device {
     @Column(name = "in_stock")
     private boolean isInStock;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     @JoinColumn(name = "factory_identifier")
     private Factory factory;
+
+    public Device(String type, String deviceModel, Double price, Date creationDate,
+                  String description, boolean isInStock, Factory factory) {
+        this.type = type;
+        this.deviceModel = deviceModel;
+        this.price = price;
+        this.creationDate = creationDate;
+        this.description = description;
+        this.isInStock = isInStock;
+        this.factory = factory;
+    }
 
     @Override
     public String toString() {
