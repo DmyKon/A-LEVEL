@@ -4,7 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import ua.konstantynov.hw24.objects.Device;
-import ua.konstantynov.hw24.objects.DeviceDTO;
+import ua.konstantynov.hw24.objects.DeviceDto;
 import ua.konstantynov.hw24.utils.HibernateSessionFactoryUtil;
 
 import java.util.ArrayList;
@@ -52,16 +52,16 @@ public class DeviceDao {
         }
     }
 
-    public List<DeviceDTO> getCountAndSumForEachFactory() {
+    public List<DeviceDto> getCountAndSumForEachFactory() {
         try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
             List<Object[]> list = session.createQuery(
                     "SELECT d.factory.id, SUM(d.price) AS total, COUNT(d.factory.id) AS count " +
                             "FROM Device d " +
                             "GROUP BY d.factory.id", Object[].class)
                     .getResultList();
-            List<DeviceDTO> resultList = new ArrayList<>();
+            List<DeviceDto> resultList = new ArrayList<>();
             for (Object[] objects : list) {
-                DeviceDTO deviceDTO = new DeviceDTO();
+                DeviceDto deviceDTO = new DeviceDto();
                 for (Object object : objects) {
                     if (object instanceof String) {
                         deviceDTO.setFactoryId((String) object);

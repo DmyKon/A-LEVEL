@@ -24,7 +24,7 @@
 package ua.konstantynov.hw24;
 
 import ua.konstantynov.hw24.objects.Device;
-import ua.konstantynov.hw24.objects.DeviceDTO;
+import ua.konstantynov.hw24.objects.DeviceDto;
 import ua.konstantynov.hw24.service.Create;
 import ua.konstantynov.hw24.service.DeviceService;
 
@@ -48,7 +48,7 @@ public class Main {
             System.out.println(dev);
         }
         System.out.println();
-        for (DeviceDTO dto : deviceService.getCountAndSumForEachFactory()) {
+        for (DeviceDto dto : deviceService.getCountAndSumForEachFactory()) {
             System.out.println(dto);
         }
     }

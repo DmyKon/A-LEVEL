@@ -5,14 +5,8 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class DeviceDTO {
+public class DeviceDto {
     private String factoryId;
     private Double total;
     private Long count;
-
-    public DeviceDTO(String factoryId, Double total, Long count) {
-        this.factoryId = factoryId;
-        this.total = total;
-        this.count = count;
-    }
 }
