@@ -29,20 +29,14 @@ public class Main {
         String vehicleId_2 = vehicleService.save(vehicle_2);
         String vehicleId_3 = vehicleService.save(vehicle_3);
         System.out.println("\nsave");
-        for (Vehicle vehicle : vehicleService.getAll()) {
-            System.out.println(vehicle);
-        }
+        vehicleService.getAll().forEach(System.out::println);
         System.out.println("\nupdate");
         vehicle_1.setId(vehicleId_2);
         vehicleService.update(vehicle_1);
-        for (Vehicle vehicle : vehicleService.getAll()) {
-            System.out.println(vehicle);
-        }
+        vehicleService.getAll().forEach(System.out::println);
         System.out.println("\ndelete");
         vehicleService.delete(vehicleId_3);
-        for (Vehicle vehicle : vehicleService.getAll()) {
-            System.out.println(vehicle);
-        }
+        vehicleService.getAll().forEach(System.out::println);
         System.out.println("\nget");
         System.out.println(vehicleService.get(vehicleId_1));
     }
