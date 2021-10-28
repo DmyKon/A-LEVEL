@@ -16,30 +16,30 @@ import ua.konstantynov.hw25.service.VehicleService;
 import java.util.Date;
 
 public class Main {
-    public static final VehicleService vehicleService = new VehicleService();
+    public static final VehicleService VEHICLE_SERVICE = new VehicleService();
 
     public static void main(String[] args) {
         Owner user = new Owner("User");
         Owner admin = new Owner("Admin");
-        Vehicle vehicle_1 = new Vehicle("Aleveludi", admin,
+        Vehicle Aleveludi = new Vehicle("Aleveludi", admin,
                 new Date(), 100_000d, "SUMMER", new Date());
-        Vehicle vehicle_2 = new Vehicle("Javesla", admin,
+        Vehicle Javesla = new Vehicle("Javesla", admin,
                 new Date(), 500_000d, "WINTER", new Date());
-        Vehicle vehicle_3 = new Vehicle("HiberVagen", user,
+        Vehicle HiberVagen = new Vehicle("HiberVagen", user,
                 new Date(), 1000_000d, "ALL_SEASON", new Date());
-        String vehicleId_1 = vehicleService.save(vehicle_1);
-        String vehicleId_2 = vehicleService.save(vehicle_2);
-        String vehicleId_3 = vehicleService.save(vehicle_3);
+        String vehicleId_1 = VEHICLE_SERVICE.save(Aleveludi);
+        String vehicleId_2 = VEHICLE_SERVICE.save(Javesla);
+        String vehicleId_3 = VEHICLE_SERVICE.save(HiberVagen);
         System.out.println("\nsave");
-        vehicleService.getAll().forEach(System.out::println);
+        VEHICLE_SERVICE.getAll().forEach(System.out::println);
         System.out.println("\nupdate");
-        vehicle_1.setId(vehicleId_2);
-        vehicleService.update(vehicle_1);
-        vehicleService.getAll().forEach(System.out::println);
+        Aleveludi.setId(vehicleId_2);
+        VEHICLE_SERVICE.update(Aleveludi);
+        VEHICLE_SERVICE.getAll().forEach(System.out::println);
         System.out.println("\ndelete");
-        vehicleService.delete(vehicleId_3);
-        vehicleService.getAll().forEach(System.out::println);
+        VEHICLE_SERVICE.delete(vehicleId_3);
+        VEHICLE_SERVICE.getAll().forEach(System.out::println);
         System.out.println("\nget");
-        System.out.println(vehicleService.get(vehicleId_1));
+        System.out.println(VEHICLE_SERVICE.get(vehicleId_1));
     }
 }
