@@ -22,10 +22,9 @@ public class Vehicle {
     @Column(name = "name")
     private String name;
 
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "owner_id")
-    private String ownerId;
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "owner_id")
+    private Owner owner;
 
     @Column(name = "manufacture_date")
     private Date manufactureDate;
@@ -39,10 +38,10 @@ public class Vehicle {
     @Column(name = "service_date")
     private Date serviceDate;
 
-    public Vehicle(String name, String ownerId, Date manufactureDate, Double price,
+    public Vehicle(String name, Owner owner, Date manufactureDate, Double price,
                    String tyresType, Date serviceDate) {
         this.name = name;
-        this.ownerId = ownerId;
+        this.owner = owner;
         this.manufactureDate = manufactureDate;
         this.price = price;
         this.tyresType = tyresType;

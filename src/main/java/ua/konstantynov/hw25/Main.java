@@ -9,21 +9,23 @@
 //System must allow to create, update, delete and get vehicles. Using the dao layer is compulsory.
 package ua.konstantynov.hw25;
 
+import ua.konstantynov.hw25.entities.Owner;
 import ua.konstantynov.hw25.entities.Vehicle;
 import ua.konstantynov.hw25.service.VehicleService;
 
 import java.util.Date;
-import java.util.UUID;
 
 public class Main {
     public static final VehicleService vehicleService = new VehicleService();
 
     public static void main(String[] args) {
-        Vehicle vehicle_1 = new Vehicle("Aleveludi", UUID.randomUUID().toString(),
+        Owner user = new Owner("User");
+        Owner admin = new Owner("Admin");
+        Vehicle vehicle_1 = new Vehicle("Aleveludi", admin,
                 new Date(), 100_000d, "SUMMER", new Date());
-        Vehicle vehicle_2 = new Vehicle("Javesla", UUID.randomUUID().toString(),
+        Vehicle vehicle_2 = new Vehicle("Javesla", admin,
                 new Date(), 500_000d, "WINTER", new Date());
-        Vehicle vehicle_3 = new Vehicle("HiberVagen", UUID.randomUUID().toString(),
+        Vehicle vehicle_3 = new Vehicle("HiberVagen", user,
                 new Date(), 1000_000d, "ALL_SEASON", new Date());
         String vehicleId_1 = vehicleService.save(vehicle_1);
         String vehicleId_2 = vehicleService.save(vehicle_2);
