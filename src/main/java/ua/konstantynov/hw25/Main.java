@@ -27,19 +27,19 @@ public class Main {
                 new Date(), 500_000d, "WINTER", new Date());
         Vehicle HiberVagen = new Vehicle("HiberVagen", user,
                 new Date(), 1000_000d, "ALL_SEASON", new Date());
-        String vehicleId_1 = VEHICLE_SERVICE.save(Aleveludi);
-        String vehicleId_2 = VEHICLE_SERVICE.save(Javesla);
-        String vehicleId_3 = VEHICLE_SERVICE.save(HiberVagen);
+        String AleveludiId = VEHICLE_SERVICE.save(Aleveludi);
+        String JaveslaId = VEHICLE_SERVICE.save(Javesla);
+        String HiberVagenId = VEHICLE_SERVICE.save(HiberVagen);
         System.out.println("\nsave");
         VEHICLE_SERVICE.getAll().forEach(System.out::println);
         System.out.println("\nupdate");
-        Aleveludi.setId(vehicleId_2);
+        Aleveludi.setId(JaveslaId);
         VEHICLE_SERVICE.update(Aleveludi);
         VEHICLE_SERVICE.getAll().forEach(System.out::println);
         System.out.println("\ndelete");
-        VEHICLE_SERVICE.delete(vehicleId_3);
+        VEHICLE_SERVICE.delete(HiberVagenId);
         VEHICLE_SERVICE.getAll().forEach(System.out::println);
         System.out.println("\nget");
-        System.out.println(VEHICLE_SERVICE.get(vehicleId_1));
+        System.out.println(VEHICLE_SERVICE.get(AleveludiId));
     }
 }
