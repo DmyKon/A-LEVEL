@@ -8,9 +8,8 @@ import java.util.List;
 public class VehicleService {
     private static final VehicleDao VEHICLE_DAO = new VehicleDao();
 
-    public String save(Vehicle vehicle) {
+    public void save(Vehicle vehicle) {
         VEHICLE_DAO.save(vehicle);
-        return vehicle.getId();
     }
 
     public void update(Vehicle vehicle) {

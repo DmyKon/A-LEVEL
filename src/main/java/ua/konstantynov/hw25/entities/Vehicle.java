@@ -4,8 +4,9 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
+@EqualsAndHashCode
 @Getter
 @Setter
 @ToString
@@ -27,19 +28,20 @@ public class Vehicle {
     private Owner owner;
 
     @Column(name = "manufacture_date")
-    private Date manufactureDate;
+    private LocalDate manufactureDate;
 
     @Column(name = "price")
     private Double price;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "tyres_type")
-    private String tyresType;
+    private TyresType tyresType;
 
     @Column(name = "service_date")
-    private Date serviceDate;
+    private LocalDate serviceDate;
 
-    public Vehicle(String name, Owner owner, Date manufactureDate, Double price,
-                   String tyresType, Date serviceDate) {
+    public Vehicle(String name, Owner owner, LocalDate manufactureDate, Double price,
+                   TyresType tyresType, LocalDate serviceDate) {
         this.name = name;
         this.owner = owner;
         this.manufactureDate = manufactureDate;
