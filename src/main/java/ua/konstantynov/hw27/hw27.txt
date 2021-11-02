@@ -4,6 +4,8 @@
 #substruction
 #multiplication
 #dividing
+#
+#Also you have to pass at least 10 answers in hacktest.
 
 clear
 
