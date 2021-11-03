@@ -23,9 +23,9 @@ read choice
 case $choice in
   1) ((  result = $a + $b  ))
   ;;
-  2) ((  result = $a  - $b ))
+  2) ((  result = $a - $b  ))
   ;;
-  3) ((  result = $a \* $b  ))
+  3) ((  result = $a \* $b ))
   ;;
   4) ((  result = $a / $b  ))
   ;;
