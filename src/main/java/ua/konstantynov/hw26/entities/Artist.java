@@ -7,6 +7,7 @@ import ua.konstantynov.hw26.enumerations.Genders;
 
 import javax.persistence.*;
 
+@EqualsAndHashCode
 @Setter
 @Getter
 @NoArgsConstructor
