@@ -1,1 +1,0 @@
-web: java $JAVA_OPTS -cp target/classes:target/dependency/* ua.konstantynov.hw28.Main.java
