@@ -17,12 +17,12 @@ class Task2 {
         AtomicLong primeCount = new AtomicLong();
         List<Integer> head = numbersList.subList(0, numbersList.size() / 2);
         List<Integer> tail = numbersList.subList(numbersList.size() / 2, numbersList.size());
-        Thread thread1 = new Thread(() ->
-                primeCount.addAndGet(head.stream()
+        Thread thread1 = new Thread(() -> primeCount.addAndGet(
+                head.stream()
                         .filter(Task2::numberIsPrime)
                         .count()));
-        Thread thread2 = new Thread(() ->
-                primeCount.addAndGet(tail.stream()
+        Thread thread2 = new Thread(() -> primeCount.addAndGet(
+                tail.stream()
                         .filter(Task2::numberIsPrime)
                         .count()));
         thread1.start();
