@@ -21,6 +21,6 @@ class Task2 {
         thread2.start();
         thread1.join();
         thread2.join();
-        System.out.printf("List has %d prime numbers\n",(thread1.getCount() + thread2.getCount()));
+        System.out.printf("List has %d prime numbers\n", (thread1.getCount() + thread2.getCount()));
     }
 }
