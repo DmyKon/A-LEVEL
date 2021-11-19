@@ -6,19 +6,13 @@ package ua.konstantynov.hw31_multithreading.task1;
 
 class Task1 {
     public static void main(String[] args) throws InterruptedException {
-        MyThread myThread = new MyThread();
-        myThread.setCount(50);
-        myThread.start();
+        new MyThread(50).start();
     }
 }
 
 class MyThread extends Thread {
     private int count;
     private int index;
-
-    public void setCount(int count) {
-        this.count = count;
-    }
 
     @Override
     public void run() {
@@ -28,5 +22,12 @@ class MyThread extends Thread {
             run();
             System.out.println("Hello from thread " + myThread.getName());
         }
+    }
+
+    public MyThread() {
+    }
+
+    public MyThread(int count) {
+        this.count = count;
     }
 }
