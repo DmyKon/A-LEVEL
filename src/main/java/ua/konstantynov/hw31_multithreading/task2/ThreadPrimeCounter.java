@@ -3,8 +3,8 @@ package ua.konstantynov.hw31_multithreading.task2;
 import java.util.List;
 
 class ThreadPrimeCounter extends Thread {
-    long count;
-    List<Integer> list;
+    private long count;
+    private final List<Integer> list;
 
     @Override
     public void run() {
