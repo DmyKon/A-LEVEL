@@ -7,24 +7,24 @@ package ua.konstantynov.hw31_multithreading.task2;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 class Task2 {
     public static void main(String[] args) throws InterruptedException {
         Integer[] numbersArray = new Integer[1000_000];
         Arrays.setAll(numbersArray, i -> i + ThreadLocalRandom.current().nextInt());
         List<Integer> numbersList = Arrays.asList(numbersArray);
-        AtomicInteger primeCount = new AtomicInteger();
+        AtomicLong primeCount = new AtomicLong();
         List<Integer> head = numbersList.subList(0, numbersList.size() / 2);
         List<Integer> tail = numbersList.subList(numbersList.size() / 2, numbersList.size());
         Thread thread1 = new Thread(() ->
-                primeCount.addAndGet(Math.toIntExact(head.stream()
+                primeCount.addAndGet(head.stream()
                         .filter(Task2::numberIsPrime)
-                        .count())));
+                        .count()));
         Thread thread2 = new Thread(() ->
-                primeCount.addAndGet(Math.toIntExact(tail.stream()
+                primeCount.addAndGet(tail.stream()
                         .filter(Task2::numberIsPrime)
-                        .count())));
+                        .count()));
         thread1.start();
         thread2.start();
         thread1.join();
