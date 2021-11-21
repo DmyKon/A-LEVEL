@@ -5,7 +5,7 @@
 package ua.konstantynov.hw31_multithreading.task1;
 
 class Task1 {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         new MyThread(50).start();
     }
 }
