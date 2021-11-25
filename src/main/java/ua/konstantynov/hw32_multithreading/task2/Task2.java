@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Task2 {
+class Task2 {
     private static int horsePlace = 1;
 
     public static void main(String[] args) throws InterruptedException {
