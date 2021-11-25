@@ -18,7 +18,7 @@ class Horse extends Thread {
                 e.printStackTrace();
             }
         }
-        place = Task2.getAndIncrementHorsePlace();
+        place = Task2.incrementAndGetHorsePlace();
     }
 
     public Horse(int number) {

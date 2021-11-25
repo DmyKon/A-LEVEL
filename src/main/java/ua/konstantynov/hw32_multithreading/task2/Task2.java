@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 class Task2 {
-    private static int horsePlace = 1;
+    private static int horsePlace;
 
     public static void main(String[] args) throws InterruptedException {
         List<Horse> horseList = new ArrayList<>();
@@ -48,7 +48,7 @@ class Task2 {
         }
     }
 
-    public static int getAndIncrementHorsePlace() {
-        return horsePlace++;
+    public static int incrementAndGetHorsePlace() {
+        return ++horsePlace;
     }
 }
