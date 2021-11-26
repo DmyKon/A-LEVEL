@@ -42,10 +42,13 @@ class Task2 {
                 horseList.add(horse);
                 horse.start();
             }
-            horseList.get(horseNumber - 1).join();
+            for (Horse horse : horseList) {
+                horse.join();
+            }
             System.out.printf("The horse you are betting on takes %d place\n\n",
                     horseList.get(horseNumber - 1).getPlace());
             horseList.clear();
+            horsePlace = 0;
         }
     }
 
