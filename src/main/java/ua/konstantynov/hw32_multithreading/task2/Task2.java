@@ -45,6 +45,7 @@ class Task2 {
             horseList.get(horseNumber - 1).join();
             System.out.printf("The horse you are betting on takes %d place\n\n",
                     horseList.get(horseNumber - 1).getPlace());
+            horseList.clear();
         }
     }
 
