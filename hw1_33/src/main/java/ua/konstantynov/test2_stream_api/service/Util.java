@@ -1,6 +1,5 @@
 package ua.konstantynov.test2_stream_api.service;
 
-import javafx.util.Pair;
 import ua.konstantynov.test2_stream_api.objects.Customer;
 import ua.konstantynov.test2_stream_api.objects.InvoiceType;
 import ua.konstantynov.test2_stream_api.objects.Product;
@@ -17,9 +16,9 @@ public class Util {
                 .filter(x -> x.getProductType().equals(productCategory)).count();
     }
 
-    public static Pair<Integer, Optional<Customer>> minimumCheckAmountAndCustomer() {
+    public static Map.Entry<Integer, Optional<Customer>> minimumCheckAmountAndCustomer() {
         int sum;
-        return new Pair<>(
+        return new AbstractMap.SimpleEntry<>(
                 sum = ShopService.getInvoices().isEmpty() ? 0 : ShopService.getInvoices().stream()
                         .map(Invoice::getProducts)
                         .map(x -> x.stream().mapToInt(Product::getPrice).sum())
