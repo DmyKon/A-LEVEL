@@ -88,8 +88,8 @@ public class ShopService {
 
     private static void createLog(Invoice invoice) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(
-                "src" + File.separator + "main" + File.separator + "resources" +
-                        File.separator + "log.txt", true))) {
+                "hw1_33" + File.separator + "src" + File.separator + "main" + File.separator +
+                        "resources" + File.separator + "log.txt", true))) {
             bufferedWriter.write(dateFormat.format(invoice.getDateTime()) +
                     " [" + invoice.getCustomer() + "] [Invoice(" + invoice.getProducts() +
                     ", type=" + invoice.getType() + ")]\n");

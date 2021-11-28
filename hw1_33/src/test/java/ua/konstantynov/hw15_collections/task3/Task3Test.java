@@ -3,7 +3,10 @@ package ua.konstantynov.hw15_collections.task3;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static ua.konstantynov.hw15_collections.task3.Task3.listToMap;
