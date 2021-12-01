@@ -10,6 +10,8 @@
     <version>1.0.0</version>
     <modules>
         <module>hw1_33</module>
+        <module>hw34</module>
+        <module>TEST_WEB</module>
     </modules>
 
     <properties>
@@ -29,11 +31,6 @@
             <artifactId>junit-jupiter-params</artifactId>
             <version>5.7.0</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.reflections</groupId>
-            <artifactId>reflections</artifactId>
-            <version>0.9.11</version>
         </dependency>
     </dependencies>
 
