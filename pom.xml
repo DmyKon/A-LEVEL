@@ -11,7 +11,6 @@
     <modules>
         <module>hw1_33</module>
         <module>hw34</module>
-        <module>TEST_WEB</module>
     </modules>
 
     <properties>
