@@ -7,12 +7,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.AbstractMap;
-import java.util.LinkedList;
 import java.util.Map;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 @WebServlet("/")
 public class MainServlet extends HttpServlet {
-    LinkedList<Map.Entry<String, String>> list = new LinkedList<>();
+    ConcurrentLinkedDeque<Map.Entry<String, String>> deque = new ConcurrentLinkedDeque<>();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -20,20 +20,19 @@ public class MainServlet extends HttpServlet {
         resp.setContentType("text/html");
         Map.Entry<String, String> entry =
                 new AbstractMap.SimpleEntry<>(req.getRemoteHost(), req.getHeader("user-agent"));
-        if (list.stream().noneMatch(x->x.getKey().equals(req.getRemoteHost()))) {
-            list.addLast(entry);
+        if (deque.stream().anyMatch(x -> x.getKey().equals(req.getRemoteHost()))) {
+            deque.remove(entry);
         }
-        list.forEach(x -> {
+        deque.addLast(entry);
+        deque.forEach(x -> {
             if (x.equals(entry)) {
-                responseBody.println("<p align=\"center\"><b>" +
-                        x.getKey() + " :: " + x.getValue() + "<b/></p>");
+                responseBody.println("<p align=\"center\"><b>" + x.getKey() + " :: " + x.getValue() + "</b></p>");
             } else {
-                responseBody.println("<p align=\"center\">" +
-                        x.getKey() + " :: " + x.getValue() + "</p>");
+                responseBody.println("<p align=\"center\">" + x.getKey() + " :: " + x.getValue() + "</p>");
             }
         });
-        if (list.size() >= 5) {
-            list.removeFirst();
+        if (deque.size() >= 5) {
+            deque.removeFirst();
         }
     }
 }
