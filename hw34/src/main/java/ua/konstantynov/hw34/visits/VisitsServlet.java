@@ -1,4 +1,4 @@
-package ua.konstantynov.hw34.visit;
+package ua.konstantynov.hw34.visits;
 
 import com.google.gson.Gson;
 import ua.konstantynov.hw34.statistics.StatisticsSingleton;
@@ -27,7 +27,7 @@ public class VisitsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         StatisticsSingleton.getInstance().incrementQueryCount();
         PrintWriter responseBody = resp.getWriter();
-        resp.setContentType("application/json");
+        resp.setContentType("text/html");
         String name = req.getParameter("name");
         String date = req.getParameter("date");
         String city = req.getParameter("city");
@@ -36,6 +36,8 @@ public class VisitsServlet extends HttpServlet {
             deque.removeFirst();
         }
         deque.add(visit);
-        responseBody.println(new Gson().toJson(visit));
+        responseBody.println("<h1><p align=\"center\"><br><br><a href=\"visits\">show visits</a></p></h1>");
+        responseBody.println("<h1><p align=\"center\"><a href=\"/form.jsp\">add new visit</a></p></h1>");
+        responseBody.println("<h1><p align=\"center\"><br><br><a href=\"/\">back</a></p></h1>");
     }
 }

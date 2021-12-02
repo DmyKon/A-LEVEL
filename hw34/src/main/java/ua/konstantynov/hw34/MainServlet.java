@@ -51,5 +51,8 @@ public class MainServlet extends HttpServlet {
         if (deque.size() >= 5) {
             deque.removeFirst();
         }
+        responseBody.println("<h1><p align=\"center\"><br><br><a href=\"visits\">visits</a></p></h1>");
+        responseBody.println("<h1><p align=\"center\"><a href=\"/form.jsp\">add new visit</a></p></h1>");
+        responseBody.println("<h1><p align=\"center\"><a href=\"statistics\">statistics</a></p></h1>");
     }
 }
