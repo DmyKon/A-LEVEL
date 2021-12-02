@@ -15,7 +15,7 @@
 //Создать класс, который будет отвечать за подсчет общего количества запросов,
 // т.е. пришел любой запрос из 3, которые мы обрабатываем – инкрементим счетчик.
 //Все ответы возвращаем в JSON формате.
-package ua.konstantynov.hw34;
+package ua.konstantynov.hw34_35;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

@@ -1,4 +1,4 @@
-package ua.konstantynov.hw34.statistics;
+package ua.konstantynov.hw34_35.statistics;
 
 import java.time.LocalDateTime;
 

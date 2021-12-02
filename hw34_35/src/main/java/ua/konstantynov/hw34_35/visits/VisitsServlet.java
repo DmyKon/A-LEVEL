@@ -1,7 +1,7 @@
-package ua.konstantynov.hw34.visits;
+package ua.konstantynov.hw34_35.visits;
 
 import com.google.gson.Gson;
-import ua.konstantynov.hw34.statistics.StatisticsSingleton;
+import ua.konstantynov.hw34_35.statistics.StatisticsSingleton;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

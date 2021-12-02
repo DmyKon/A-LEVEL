@@ -1,11 +1,11 @@
-<%@ page import="ua.konstantynov.hw34.statistics.StatisticsSingleton" %>
+<%@ page import="ua.konstantynov.hw34_35.statistics.StatisticsSingleton" %>
 <% StatisticsSingleton.getInstance().incrementQueryCount(); %>
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Form</title>
   </head>
   <body>
     <center>

@@ -1,4 +1,4 @@
-package ua.konstantynov.hw34.visits;
+package ua.konstantynov.hw34_35.visits;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
