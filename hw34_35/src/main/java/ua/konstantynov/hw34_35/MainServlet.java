@@ -48,7 +48,7 @@ public class MainServlet extends HttpServlet {
                 responseBody.println("<p align=\"center\">" + x.getKey() + " :: " + x.getValue() + "</p>");
             }
         });
-        if (deque.size() >= 5) {
+        if (deque.size() > 5) {
             deque.removeFirst();
         }
         responseBody.println("<h1><p align=\"center\"><br><br><a href=\"visits\">visits</a></p></h1>");

@@ -5,29 +5,16 @@
 package ua.konstantynov.hw31_multithreading.task1;
 
 class Task1 {
-    public static void main(String[] args) {
-        new MyThread(50).start();
-    }
-}
-
-class MyThread extends Thread {
-    private int count;
-    private int index;
-
-    @Override
-    public void run() {
-        while (count-- > 0) {
-            MyThread myThread = new MyThread();
-            myThread.setName(String.valueOf(index++));
-            run();
-            System.out.println("Hello from thread " + myThread.getName());
+    public static void main(String[] args) throws InterruptedException {
+        int count = 50;
+        for (int i = 0; i < count; i++) {
+            int treadIndex = count - i - 1;
+            Thread myThread = new Thread(() -> {
+                Thread.currentThread().setName(String.valueOf(treadIndex));
+                System.out.println("Hello from thread " + Thread.currentThread().getName());
+            });
+            myThread.start();
+            myThread.join();
         }
-    }
-
-    public MyThread() {
-    }
-
-    public MyThread(int count) {
-        this.count = count;
     }
 }

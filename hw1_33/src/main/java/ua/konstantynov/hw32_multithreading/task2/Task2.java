@@ -52,7 +52,7 @@ class Task2 {
         }
     }
 
-    public static int incrementAndGetHorsePlace() {
+    synchronized public static int incrementAndGetHorsePlace() {
         return ++horsePlace;
     }
 }

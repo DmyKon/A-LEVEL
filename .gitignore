@@ -1,6 +1,4 @@
 /.idea
-ALEVEL.iml
+**/*.iml
 hw1_33/target
-hw1_33/hw1_33.iml
 hw34_35/target
-hw34_35/hw34_35.iml
