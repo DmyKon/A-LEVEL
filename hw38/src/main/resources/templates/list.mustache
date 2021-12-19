@@ -1,0 +1,34 @@
+<html>
+    <body>
+        <br>
+        <br>
+        <center>
+            <h3>Race list</h3>
+            <tr th:each="book : ${books}">
+                <td><span th:text="${book.title}"> Title </span></td>
+                <td><span th:text="${book.author}"> Author </span></td>
+            </tr>
+            {{#races}}
+            <p>Race #<a style="color: #FF0000" href="/race/{{identifier}}">{{identifier}}</a>
+                Time = <span style="color: #FF0000;">{{dateTime}}</span>
+                Betting on #<span style="color: #FF0000;">{{horseNumber}}</span>
+                Horses count = <span style="color: #FF0000;">{{horseCount}}</span></p>
+            {{/races}}
+            <br>
+            <h3><a href="/">back to menu</a></h3>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <form method="post" action="/list">
+                Enter "Accept" to clear the results
+                <br>
+                <input type="text" name="clear" placeholder="Accept">
+                <button type="submit">CLEAR</button>
+            </form>
+        </center>
+    </body>
+</html>

@@ -11,6 +11,7 @@
     <modules>
         <module>hw1_33</module>
         <module>hw34_35</module>
+        <module>hw38</module>
     </modules>
 
     <properties>
@@ -22,8 +23,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.20</version>
-            <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
