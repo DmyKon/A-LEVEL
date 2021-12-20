@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<br>
+<br>
+<center>
+    <h3>Race list</h3>
+    <tr th:each="race : ${races}">
+        <p>Race #<a style="color: #FF0000" th:href="@{'/race/' + ${race.identifier}}"><span
+                style="color: #FF0000" th:text="${race.identifier}"></span></a>
+            Time =<span style="color: #FF0000" th:text="${race.dateTime}"></span>
+            Betting on #<span style="color: #FF0000" th:text="${race.horseNumber}"></span>
+            Horses count = <span style="color: #FF0000" th:text="${race.horseCount}"></span></p>
+    </tr>
+    <br>
+    <h3><a href="/">back to menu</a></h3>
+    <br>
+    <br>
+    <form method="post" action="/list">
+        Enter "Accept" to clear the results
+        <br>
+        <input type="text" name="clear" placeholder="Accept">
+        <button type="submit">CLEAR</button>
+    </form>
+</center>
+</body>
+</html>

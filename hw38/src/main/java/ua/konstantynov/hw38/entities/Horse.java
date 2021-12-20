@@ -1,11 +1,15 @@
 package ua.konstantynov.hw38.entities;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import ua.konstantynov.hw38.service.RacesService;
 
 import javax.persistence.*;
 import java.util.concurrent.ThreadLocalRandom;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "horse")
 public class Horse extends Thread {
@@ -38,37 +42,5 @@ public class Horse extends Thread {
             }
         }
         place = RacesService.incrementAndGetHorsePlace();
-    }
-
-    public String getIdentifier() {
-        return identifier;
-    }
-
-    public void setIdentifier(String identifier) {
-        this.identifier = identifier;
-    }
-
-    public int getPlace() {
-        return place;
-    }
-
-    public void setPlace(int place) {
-        this.place = place;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
-    public Race getRace() {
-        return race;
-    }
-
-    public void setRace(Race race) {
-        this.race = race;
     }
 }

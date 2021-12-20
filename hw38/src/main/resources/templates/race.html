@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<center>
+    <div th:if="${race}">
+        <h3>Race result</h3>
+        <p>Race #<span style="color: #FF0000" th:text="${race.identifier}"></span>
+            Time = <span style="color: #FF0000" th:text="${race.dateTime}"></span>
+            Horses count = <span style="color: #FF0000" th:text="${race.horseCount}"></span>
+            Betting on = <span style="color: #FF0000" th:text="${race.horseNumber}"></span></p>
+        <tr th:each="horse : ${race.horses}">
+            <div th:if="${race.horseNumber} == ${horse.number}">
+                <h3>Place #<span style="color: #FF0000" th:text="${horse.place}"></span>
+                    Horse #<span style="color: #FF0000" th:text="${horse.number}"></span></h3>
+            </div>
+            <div th:if="${race.horseNumber} != ${horse.number}">
+                <p>Place #<span style="color: #FF0000" th:text="${horse.place}"></span>
+                    Horse #<span style="color: #FF0000" th:text="${horse.number}"></span></p>
+            </div>
+        </tr>
+    </div>
+    <div th:unless="${race}">
+        <h2 style="color: #FF0000">RACE ID NOT FOUND!</h2>
+    </div>
+    <br>
+    <a href="/list">back to list</a>
+    <br>
+    <br>
+    <a href="/">back to menu</a>
+</center>
+</body>
+</html>
