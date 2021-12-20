@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ua.konstantynov.hw38.entities.Horse;
 import ua.konstantynov.hw38.entities.Race;
-import ua.konstantynov.hw38.repos.RaceRepo;
+import ua.konstantynov.hw38.repository.RaceRepository;
 import ua.konstantynov.hw38.service.RacesService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +17,7 @@ public class RaceController {
     private static String exceptionMessage;
 
     @Autowired
-    private RaceRepo raceRepo;
+    private RaceRepository raceRepository;
 
     @RequestMapping(method = RequestMethod.GET, value = "/")
     public String main() {
@@ -26,14 +26,14 @@ public class RaceController {
 
     @GetMapping("/list")
     public String listGet(Model model) {
-        model.addAttribute("races", raceRepo.findAll());
+        model.addAttribute("races", raceRepository.findAll());
         return "list";
     }
 
     @PostMapping("list")
     public String listClear(@RequestParam String clear) {
         if (clear.equals("Accept")) {
-            raceRepo.deleteAll();
+            raceRepository.deleteAll();
         }
         return "redirect:/list";
     }
@@ -56,7 +56,7 @@ public class RaceController {
     public String postStats(@RequestParam String number, @RequestParam String count, Model model) {
         try {
             Race race = RACES_SERVICE.startRace(Integer.parseInt(count), Integer.parseInt(number));
-            raceRepo.save(race);
+            raceRepository.save(race);
             Integer horsePlace = race.getHorses().stream()
                     .filter(x -> x.getNumber() == Integer.parseInt(number))
                     .findFirst()
@@ -64,7 +64,7 @@ public class RaceController {
                     .orElse(null);
             model.addAttribute("race", race);
             model.addAttribute("horsePlace", horsePlace);
-            model.addAttribute("racesCount", raceRepo.count());
+            model.addAttribute("racesCount", raceRepository.count());
             return "stats";
         } catch (NumberFormatException e) {
             exceptionMessage = "Enter race parameters!";
@@ -78,7 +78,7 @@ public class RaceController {
     @GetMapping("/race/*")
     public String getId(HttpServletRequest request, Model model) {
         try {
-            Race race = raceRepo.findByIdentifier(Long.parseLong(request.getRequestURI().replaceAll("[^0-9]", "")));
+            Race race = raceRepository.findByIdentifier(Long.parseLong(request.getRequestURI().replaceAll("[^0-9]", "")));
             model.addAttribute("race", race);
         } catch (NumberFormatException ignored) {
         }
@@ -87,7 +87,7 @@ public class RaceController {
 
     @PostMapping("/race")
     public String postId(@RequestParam String id, Model model) {
-        model.addAttribute("race", raceRepo.findByIdentifier(Long.parseLong(id)));
+        model.addAttribute("race", raceRepository.findByIdentifier(Long.parseLong(id)));
         return "race";
     }
 }
